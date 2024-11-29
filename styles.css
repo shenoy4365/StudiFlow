@@ -1,0 +1,596 @@
+/* Base Styles */
+:root {
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --secondary-color: #64748b;
+    --surface-color: #1e293b;
+    --surface-dark: #0f172a;
+    --surface-hover: #334155;
+    --surface-active: #1e293b;
+    --background-color: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --danger-color: #ef4444;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Layout */
+.app-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--surface-color);
+    padding: 1.5rem 1rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--text-secondary);
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.nav-item i {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn.secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+.btn.secondary:hover {
+    opacity: 0.9;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Calendar */
+.calendar-container {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+.calendar-header button:hover {
+    color: var(--primary-color);
+}
+
+.calendar-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.calendar-grid {
+    margin-bottom: 1.5rem;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    background-color: var(--surface-dark);
+    padding: 0.75rem 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.calendar-day {
+    background-color: var(--surface-color);
+    min-height: 100px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+    background-color: var(--surface-hover);
+}
+
+.calendar-day.other-month {
+    color: var(--text-secondary);
+}
+
+.calendar-day.today {
+    background-color: var(--surface-active);
+}
+
+.calendar-day .date {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.calendar-event {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-event:hover {
+    background-color: var(--primary-hover);
+}
+
+.delete-event-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    padding: 0.125rem;
+}
+
+.calendar-event:hover .delete-event-btn {
+    opacity: 1;
+}
+
+.events-list {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.events-list h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+#eventsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.event-item {
+    background-color: var(--surface-dark);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.event-item:hover {
+    background-color: var(--surface-hover);
+}
+
+.event-info h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.event-info p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.event-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Todo List */
+.todo-list {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+/* Notes */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.note-card {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.note-content {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+}
+
+.note-footer {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Assignments */
+.assignments-list {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.assignment-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.assignment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.assignment-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.assignment-type {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    background-color: var(--primary-color);
+}
+
+.assignment-description {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.assignment-footer {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.due-date.overdue {
+    color: var(--danger-color);
+}
+
+/* Timer */
+.timer-container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.timer-display {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#timerDisplay {
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: monospace;
+    margin: 1rem 0;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.timer-settings {
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.setting {
+    margin-bottom: 1rem;
+}
+
+.setting:last-child {
+    margin-bottom: 0;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--surface-color);
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    width: 90%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.close:hover {
+    color: var(--text-primary);
+}
+
+/* Utility Classes */
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--danger-color);
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-around;
+        z-index: 100;
+    }
+
+    .nav-item {
+        flex-direction: column;
+        padding: 0.5rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-item i {
+        margin: 0 0 0.25rem 0;
+    }
+
+    .nav-item span {
+        font-size: 0.75rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+        padding-bottom: 5rem;
+    }
+
+    .calendar-grid {
+        font-size: 0.875rem;
+    }
+
+    .days div {
+        min-height: 80px;
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+}

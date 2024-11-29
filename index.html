@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Productivity App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="logo">StudiFlow</div>
+            <div class="nav-item active" data-tab="calendar">
+                <i class="fas fa-calendar"></i>
+                <span>Calendar</span>
+            </div>
+            <div class="nav-item" data-tab="todo">
+                <i class="fas fa-tasks"></i>
+                <span>Todo</span>
+            </div>
+            <div class="nav-item" data-tab="notes">
+                <i class="fas fa-sticky-note"></i>
+                <span>Notes</span>
+            </div>
+            <div class="nav-item" data-tab="assignments">
+                <i class="fas fa-book"></i>
+                <span>Assignments</span>
+            </div>
+            <div class="nav-item" data-tab="timer">
+                <i class="fas fa-clock"></i>
+                <span>Timer</span>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Calendar Tab -->
+            <section id="calendar" class="tab-content active">
+                <div class="section-header">
+                    <h2>Calendar</h2>
+                    <button id="addEventBtn" class="btn primary">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                        <h2 id="currentMonth"></h2>
+                        <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="weekdays"></div>
+                        <div class="days"></div>
+                    </div>
+                    <div class="events-list">
+                        <h3>Upcoming Events</h3>
+                        <div id="eventsList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Todo List Tab -->
+            <section id="todo" class="tab-content">
+                <div class="section-header">
+                    <h2>Todo List</h2>
+                </div>
+                <form id="addTodoForm" class="add-form">
+                    <input type="text" id="todoInput" placeholder="Add a new task..." required>
+                    <button type="submit" class="btn primary">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </form>
+                <div id="todoList" class="todo-list"></div>
+            </section>
+
+            <!-- Notes Tab -->
+            <section id="notes" class="tab-content">
+                <div class="section-header">
+                    <h2>Notes</h2>
+                    <button id="addNoteBtn" class="btn primary">
+                        <i class="fas fa-plus"></i> Add Note
+                    </button>
+                </div>
+                <div id="notesContainer" class="notes-grid"></div>
+            </section>
+
+            <!-- Assignments Tab -->
+            <section id="assignments" class="tab-content">
+                <div class="section-header">
+                    <h2>Assignments</h2>
+                    <button id="addAssignmentBtn" class="btn primary">
+                        <i class="fas fa-plus"></i> Add Assignment
+                    </button>
+                </div>
+                <div id="assignmentsList" class="assignments-list"></div>
+            </section>
+
+            <!-- Timer Tab -->
+            <section id="timer" class="tab-content">
+                <div class="section-header">
+                    <h2>Pomodoro Timer</h2>
+                </div>
+                <div class="timer-container">
+                    <div class="timer-display">
+                        <h3 id="timerMode">Study Time</h3>
+                        <div id="timerDisplay">25:00</div>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="startTimer" class="btn primary">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="resetTimer" class="btn secondary">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    <div class="timer-settings">
+                        <div class="setting">
+                            <label for="studyTime">Study Time (minutes):</label>
+                            <input type="number" id="studyTime" min="1" max="60" value="25">
+                        </div>
+                        <div class="setting">
+                            <label for="breakTime">Break Time (minutes):</label>
+                            <input type="number" id="breakTime" min="1" max="30" value="5">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Calendar Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Event</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Title:</label>
+                    <input type="text" id="eventTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Date:</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventTime">Time:</label>
+                    <input type="time" id="eventTime">
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Description:</label>
+                    <textarea id="eventDescription"></textarea>
+                </div>
+                <button type="submit" class="btn primary">Save Event</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Note</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="noteForm">
+                <div class="form-group">
+                    <label for="noteTitle">Title:</label>
+                    <input type="text" id="noteTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="noteContent">Content:</label>
+                    <textarea id="noteContent" required></textarea>
+                </div>
+                <button type="submit" class="btn primary">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assignment Modal -->
+    <div id="assignmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Assignment</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="assignmentForm">
+                <div class="form-group">
+                    <label for="assignmentTitle">Title:</label>
+                    <input type="text" id="assignmentTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentType">Type:</label>
+                    <select id="assignmentType" required>
+                        <option value="Homework">Homework</option>
+                        <option value="Project">Project</option>
+                        <option value="Quiz">Quiz</option>
+                        <option value="Exam">Exam</option>
+                        <option value="Paper">Paper</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentDueDate">Due Date:</label>
+                    <input type="datetime-local" id="assignmentDueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentDescription">Description:</label>
+                    <textarea id="assignmentDescription"></textarea>
+                </div>
+                <button type="submit" class="btn primary">Save Assignment</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
